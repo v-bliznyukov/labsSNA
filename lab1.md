@@ -11,7 +11,7 @@ To start with, it is better first to describe `/etc/apt/sources.list` file. This
 ### 2.  How can you add/delete 3rd party repositories to install required software? Provide an example.
 
 #### Adding:
-As discussed in the previous question, in order to add a 3rd party repository we need to define this repository inside `/etc/apt/sources.list` or in a separate file inside `/etc/apt/sources.list.d` directory. The format is as follows:
+As discussed in the previous question, in order to add a 3rd party repository we need to define this repository inside `/etc/apt/sources.list` or in a separate file inside `/etc/apt/sources.list.d` directory. The format of the line one should add is as follows:
 
 -   Log in as root or a user with side rights
 -   Define type of the software archive (deb/deb-src). 
