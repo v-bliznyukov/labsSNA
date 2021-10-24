@@ -99,7 +99,7 @@ There are several states process can be in:
 8. *l* = threaded process
 9. *N* = low priority. It is Nice to other processes)
 10. *>* = high priority process
-11. *+* = Process is running in a foreground
+11. *+* = process is running in a foreground
 
 For output of my system, the states are the following:
 - S,Ss, Ssl, SNl, Sl+ (for tty)
