@@ -1,4 +1,4 @@
-# Lab1 Q&A
+# LAB1 Q&A
 
 
 ## Part 1
