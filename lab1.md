@@ -56,6 +56,7 @@ As discussed in the previous question, in order to add a 3rd party repository we
 
 - `sudo rm /etc/apt/sources.list.d/mongodb-org-5.0.list`
 - `sudo apt-key list` (MongoDB had F567 9A22 2C64 7C87 527C 2FBC B00A 0BD1 E2C6 3C11)
+![image](https://github.com/v-bliznyukov/labsSNA/blob/main/list_keys.png)
 - `sudo apt-key del  E2C63C11` - one can specify last 8 symbols of the key id
 - `sudo apt-get update`
 
@@ -70,7 +71,7 @@ APT that is used to update repository packages always checks signature of the re
 ## Part 2
 
 ### 1.  Describe how “top” works. Explain all important fields in its output based on your system resources.
-
+![image](https://github.com/v-bliznyukov/labsSNA/blob/main/top.png)
 <code>top</code> command displays information about currently running processes/threads, system and resource usage. Moreover, <code>top</code> updates this information every time interval. User can specify the number of refreshments until quitting. 
 There are several important fields of the output:
 1. Process Id (PID)
