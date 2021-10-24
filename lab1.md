@@ -115,8 +115,10 @@ When a child process terminates it releases the occupied resources except for th
 ### 4.  How to know which process ID used by application?
 <code> ps aux | grep *application name* </code>
 
-`ps aux` will return all processes (including not attached to terminal) and list the ones that have application name in the process table entry.
+`ps aux` will return all processes (including not attached to terminal) and list the ones that have application name in the process table entry. After it, one needs to check what command is used by the process.
 For example:
+![image](https://github.com/v-bliznyukov/labsSNA/blob/main/find_name.png)
+Here, we see the actuall running app is in process 15376, which is indicated by R state and md5sum /dev/sda command, while process with id 15375 is executing sudo command and is currently sleeping. 
 
 
 ### 5.  What is a zombie process and what could be the cause of it? How to find and kill zombie process?
