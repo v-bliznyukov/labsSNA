@@ -110,7 +110,7 @@ For output of my system, the states are the following:
 
 ### 3.  What happens to a child process that dies and has no parent process to wait for it and what’s bad about this?
 
-When a child process dies it releases the occupied resources except for the slot in process table (like PID). Then it sends a message to parent process, parent determines whether the exit was successful or not, end cleans the PT slot. In case when parent is dead also, there is no one to release process. Therefore, process stays in Zombie state and it cannot be killed since it does not exists. Apart from space usage, a lot of such processes occupy a lot of process IDs which may prevent other processes from running. 
+When a child process terminates it releases the occupied resources except for the slot in process table (like PID). Then it sends a message to parent process, parent determines whether the exit was successful or not, end cleans the PT slot. In case when parent is dead also, there is no one to release process. Therefore, process stays in Zombie state and it cannot be killed since it does not exists. Apart from space usage, a lot of such processes occupy a lot of process IDs which may prevent other processes from running. 
 
 ### 4.  How to know which process ID used by application?
 <code> ps | grep *application name* </code> - for processes running in a current shell
@@ -118,13 +118,14 @@ When a child process dies it releases the occupied resources except for the slot
 
 ### 5.  What is a zombie process and what could be the cause of it? How to find and kill zombie process?
 
-As discussed, process enters Zombie state between exiting and parent process releasing it (process has finished but still in the process table). A process may remain in Zombie state for a long time if parent process does not notice child's termination. This child process occupies some memory in process table, however, a lot of such entries may be a problem. That many Zombie processes show that application has some troubles executing.
+As discussed, process enters Zombie state between exiting and parent process releasing it (process has finished but still in the process table). A process may remain in Zombie state for a long time if parent process does not notice child's termination. This child process occupies some memory in process table, however, a lot of such entries may be a problem (preventing other processes from running). That many Zombie processes show that application has some troubles executing.
  
 The command to find Zombie process can be:
 
 <code> ps axo pid,stat | awk '$2 ~ /^Z/ { print $1 }' </code> 
 
 However, this will consider that system had identified this process as Zombie and may not always be a reliable way. 
+
 Note:
 -   a = show processes for all users
     
@@ -144,7 +145,7 @@ Technically process is already dead, so it will not respond to any signals, so s
 
 OR
 - Kill the parent process with `kill -9 [Parent PID]`
-Terminating a parent process will trigger init process to take over the child processes. Then the init performs necessary  deletion of Zombie processes.
+Terminating a parent process will trigger init process to take over the child processes. Then the init performs necessary deletion of Zombie processes.
 
 OR (In extreme case)
 - Restart the system
