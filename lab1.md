@@ -7,6 +7,10 @@
 
 To start with, it is better first to describe `/etc/apt/sources.list` file. This file contains a list of repositories (package sources) of the system, where each line is a package info (source, format, and other components). That file is *unique* and usually it contains system native repositories. Thus, imagine we have a lot of repositories and we want to remove one of them. For that, we need to manipulate the whole list. This causes access issues (with only one file we would have many users to have access to it) and, consequently, harder to maintain. With `etc/apt/sources.list.d` is a directory, users can create multiple files of .list and define repositories there. As a result, when one wants to remove a repository, they can simply remove specific file from `/etc/apt/sources.list.d` without manipulating the main list. This is much more manageable. 
 
+#### Usage example: 
+
+I would use `nano /etc/apt/sources.list.d/filename.list`, because I want to add a repository definition in a separete file, then I would add a line (its format is specified in the second task) and save the file. 
+
 
 ### 2.  How can you add/delete 3rd party repositories to install required software? Provide an example.
 
@@ -58,10 +62,11 @@ As discussed in the previous question, in order to add a 3rd party repository we
 
 ### 3.  When do you need to get public key for the usage of the remote repo? Provide an example.
 
-Public key is a tool of verifying whether the source is a trusted and whether apt can get updates from it. Thus, before using `apt-get update` one needs to load the public repo key. After it the public key gets validated and signed with apt private key.
+APT that is used to update repository packeges always checks signature of the release files. Moreover, it requires repositories to provide most recent key. This ensures that the provider can be trusted. Without this key, apt will refuse apt-get update. Therefore for every 3rd party repository key is needed in order for apt-secure to verify it. (All default installations already have a key)
 
 #### Example: 
-- As shown in previous example, or adding MongoDB repository the public key is needed.
+- As shown in previous example, for adding 3rd party MongoDB repository the public key is needed.
+
 ## Part 2
 
 ### 1.  Describe how “top” works. Explain all important fields in its output based on your system resources.
@@ -89,6 +94,18 @@ There are several states process can be in:
 *S* = sleeping, process needs some resource, which is currently unavailable. Therefore, process stops execution for some time.
 *T* = stopped process
 *Z* = zombie. State that a process enters after exiting time and before parent releases it.
+Optionally all processes may have:
+*s* = leader of the session
+*l* = threaded process
+*N* = low priority. It is Nice to other processes)
+*>* = high priority process
+*+* = Process is running in a foreground
+
+For output of my system, the states are the following:
+- S,Ss, Ssl, SNl, Sl+ (for tty)
+- I<
+- R+ (for ps aux command)
+- T
 
 
 ### 3.  What happens to a child process that dies and has no parent process to wait for it and what’s bad about this?
@@ -105,21 +122,21 @@ As discussed, process enters Zombie state between exiting and parent process rel
  
 The command to find Zombie process can be:
 
-<code> ps axo pid, stat | awk '$2 ~ /^Z/ { print $1 }' </code> 
+<code> ps axo pid,stat | awk '$2 ~ /^Z/ { print $1 }' </code> 
 
 However, this will consider that system had identified this process as Zombie and may not always be a reliable way. 
 Note:
 -   a = show processes for all users
     
--   u = display the process’s user/owner
-    
 -   x = also show processes not attached to a terminal
 
-<code> ps aux | egrep "Z|defunct"</code> 
+-   o = user specified format 
 
-The command above gets a list of all running processes and egrep iterates over that list trying to find Z or defunct in the line. Defunct means that process has finished or terminated due to some error. Either way it is not functioning. 
+`ps axo pid,stat,ppid,comm | egrep "Z|defunct"`
 
-Also, one can use top command to see the number of Zombie processes in a system.
+The command above gets a list of all running processes and takes user specified fields; and egrep iterates over that list trying to find Z or defunct in the line. Defunct means that process has finished or terminated due to some error. Either way it is not functioning. 
+
+Also, one can use top command to see the number of identified Zombie processes in a system.
 
 Technically process is already dead, so it will not respond to any signals, so sending signals directly will not help. One can try several options:
 - Identify parent process with `ps -o ppid= [Zombie Id] `
