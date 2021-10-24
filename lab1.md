@@ -113,8 +113,11 @@ For output of my system, the states are the following:
 When a child process terminates it releases the occupied resources except for the slot in process table (like PID). Then it sends a message to parent process, parent determines whether the exit was successful or not, end cleans the PT slot. In case when parent is dead also, there is no one to release process. Therefore, process stays in Zombie state and it cannot be killed since it does not exists. Apart from space usage, a lot of such processes occupy a lot of process IDs which may prevent other processes from running. 
 
 ### 4.  How to know which process ID used by application?
-<code> ps | grep *application name* </code> - for processes running in a current shell
-<code> ps -ef | grep *application name* </code> - for all processes running in the system.
+<code> ps aux | grep *application name* </code>
+
+`ps aux` will return all processes (including not attached to terminal) and list the ones that have application name in the process table entry.
+For example:
+
 
 ### 5.  What is a zombie process and what could be the cause of it? How to find and kill zombie process?
 
