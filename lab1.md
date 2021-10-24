@@ -23,7 +23,7 @@ As discussed in the previous question, in order to add a 3rd party repository we
 -   Define the distribution code name.
 -   Define other repository components or categories (main, restricted, universe and multiverse). 
 - **Usually  all of the above options are provided by software owner**
-- In order to be able to configure repository, one needs to import a public key from of the repository `curl -L [Key URL] | sudo apt-key add -`
+- In order to be able to install software from repository, one needs to import a public key from of the repository `curl -L [Key URL] | sudo apt-key add -`
 - Run `sudo nano /etc/apt/sources.list` or `sudo nano /etc/apt/sources.list.d/filename.list` 
 - In editor add line `[deb/deb-scr] [Repo URL] [System codename] [main] ` 
 - **The line above is specified by software provider**
