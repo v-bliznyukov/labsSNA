@@ -94,7 +94,7 @@ There are several states process can be in:
 4. *S* = sleeping, process needs some resource, which is currently unavailable. Therefore, process stops execution for some time.
 5. *T* = stopped process
 6. *Z* = zombie. State that a process enters after exiting time and before parent releases it.
-Optionally all processes may have:
+**Optionally all processes may have:**
 7. *s* = leader of the session
 8. *l* = threaded process
 9. *N* = low priority. It is Nice to other processes)
