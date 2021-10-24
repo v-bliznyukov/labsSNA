@@ -62,7 +62,7 @@ As discussed in the previous question, in order to add a 3rd party repository we
 
 ### 3.  When do you need to get public key for the usage of the remote repo? Provide an example.
 
-APT that is used to update repository packeges always checks signature of the release files. Moreover, it requires repositories to provide most recent key. This ensures that the provider can be trusted. Without this key, apt will refuse apt-get update. Therefore for every 3rd party repository key is needed in order for apt-secure to verify it. (All default installations already have a key)
+APT that is used to update repository packages always checks signature of the release files. Moreover, it requires repositories to provide most recent key. This ensures that the provider can be trusted. Without this key, apt will refuse apt-get update. Therefore for every 3rd party repository key is needed in order for apt-secure to verify it. (All default installations already have a key)
 
 #### Example: 
 - As shown in previous example, for adding 3rd party MongoDB repository the public key is needed.
@@ -88,18 +88,18 @@ There are several important fields of the output:
 
 ### 2.  Explain briefly each process states from the output of the “top” command.
 There are several states process can be in:
-*D* = uninterruptible sleep. Process waits for some event to happen to continue execution.
-*I* = idle process i.e. has nothing to do.
-*R* = running, executing right now
-*S* = sleeping, process needs some resource, which is currently unavailable. Therefore, process stops execution for some time.
-*T* = stopped process
-*Z* = zombie. State that a process enters after exiting time and before parent releases it.
+1. *D* = uninterruptible sleep. Process waits for some event to happen to continue execution.
+2. *I* = idle process i.e. has nothing to do.
+3. *R* = running, executing right now
+4. *S* = sleeping, process needs some resource, which is currently unavailable. Therefore, process stops execution for some time.
+5. *T* = stopped process
+6. *Z* = zombie. State that a process enters after exiting time and before parent releases it.
 Optionally all processes may have:
-*s* = leader of the session
-*l* = threaded process
-*N* = low priority. It is Nice to other processes)
-*>* = high priority process
-*+* = Process is running in a foreground
+7. *s* = leader of the session
+8. *l* = threaded process
+9. *N* = low priority. It is Nice to other processes)
+10. *>* = high priority process
+11. *+* = Process is running in a foreground
 
 For output of my system, the states are the following:
 - S,Ss, Ssl, SNl, Sl+ (for tty)
